@@ -88,115 +88,115 @@
       <heading_deg>0</heading_deg>
     </spherical_coordinates>
     <state world_name='default'>
-      <sim_time>90 938000000</sim_time>
-      <real_time>27 461121603</real_time>
-      <wall_time>1682531014 477383643</wall_time>
-      <iterations>27343</iterations>
+      <sim_time>227 147000000</sim_time>
+      <real_time>136 767459444</real_time>
+      <wall_time>1682531372 546666932</wall_time>
+      <iterations>136209</iterations>
       <model name='blue_wall'>
-        <pose>3.1 -3 2 0 -0 0</pose>
+        <pose>3.1 -3 1 0 -0 0</pose>
         <scale>1 1 1</scale>
         <link name='link'>
-          <pose>3.1 -3 2 0 -0 0</pose>
+          <pose>3.1 -3 1 0 -0 0</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
         </link>
       </model>
       <model name='blue_wall_0'>
-        <pose>6.1 0 2 0 -0 1.5708</pose>
+        <pose>6.1 0 1 0 -0 1.5708</pose>
         <scale>1 1 1</scale>
         <link name='link'>
-          <pose>6.1 0 2 0 -0 1.5708</pose>
+          <pose>6.1 0 1 0 -0 1.5708</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
         </link>
       </model>
       <model name='blue_wall_1'>
-        <pose>3.1 3 2 0 -0 0</pose>
+        <pose>3.1 3 1 0 -0 0</pose>
         <scale>1 1 1</scale>
         <link name='link'>
-          <pose>3.1 3 2 0 -0 0</pose>
+          <pose>3.1 3 1 0 -0 0</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
         </link>
       </model>
       <model name='blue_wall_half'>
-        <pose>0.1 2 2 0 -0 1.5708</pose>
+        <pose>0.1 2 1 0 -0 1.5708</pose>
         <scale>1 1 1</scale>
         <link name='link'>
-          <pose>0.1 2 2 0 -0 1.5708</pose>
+          <pose>0.1 2 1 0 -0 1.5708</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
         </link>
       </model>
       <model name='blue_wall_half_0'>
-        <pose>0.1 -2 2 0 -0 1.5708</pose>
+        <pose>0.1 -2 1 0 -0 1.5708</pose>
         <scale>1 1 1</scale>
         <link name='link'>
-          <pose>0.1 -2 2 0 -0 1.5708</pose>
+          <pose>0.1 -2 1 0 -0 1.5708</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
         </link>
       </model>
       <model name='green_wall'>
-        <pose>-3 3 2 0 -0 0</pose>
+        <pose>-3 3 1 0 -0 0</pose>
         <scale>1 1 1</scale>
         <link name='link'>
-          <pose>-3 3 2 0 -0 0</pose>
+          <pose>-3 3 1 0 -0 0</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
         </link>
       </model>
       <model name='green_wall_0'>
-        <pose>-3 -3 2 0 -0 0</pose>
+        <pose>-3 -3 1 0 -0 0</pose>
         <scale>1 1 1</scale>
         <link name='link'>
-          <pose>-3 -3 2 0 -0 0</pose>
+          <pose>-3 -3 1 0 -0 0</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
         </link>
       </model>
       <model name='green_wall_1'>
-        <pose>-6 0 2 0 -0 1.5708</pose>
+        <pose>-6 0 1 0 -0 1.5708</pose>
         <scale>1 1 1</scale>
         <link name='link'>
-          <pose>-6 0 2 0 -0 1.5708</pose>
+          <pose>-6 0 1 0 -0 1.5708</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
         </link>
       </model>
       <model name='green_wall_half'>
-        <pose>0 -2 2 0 -0 1.5708</pose>
+        <pose>0 -2 1 0 -0 1.5708</pose>
         <scale>1 1 1</scale>
         <link name='link'>
-          <pose>0 -2 2 0 -0 1.5708</pose>
+          <pose>0 -2 1 0 -0 1.5708</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
         </link>
       </model>
       <model name='green_wall_half_0'>
-        <pose>0 2 2 0 -0 1.5708</pose>
+        <pose>0 2 1 0 -0 1.5708</pose>
         <scale>1 1 1</scale>
         <link name='link'>
-          <pose>0 2 2 0 -0 1.5708</pose>
+          <pose>0 2 1 0 -0 1.5708</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
         </link>
       </model>
       <model name='ground_plane'>
-        <pose>0 0 1 0 -0 0</pose>
+        <pose>0 0 0 0 -0 0</pose>
         <scale>1 1 1</scale>
         <link name='link'>
-          <pose>0 0 1 0 -0 0</pose>
+          <pose>0 0 0 0 -0 0</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
@@ -1228,7 +1228,7 @@
     </model>
     <gui fullscreen='0'>
       <camera name='user_camera'>
-        <pose>-2.93662 22.9386 23.087 0 0.662816 -1.61223</pose>
+        <pose>-58.3346 58.7153 37.0178 0 0.266816 -1.16422</pose>
         <view_controller>orbit</view_controller>
         <projection_type>perspective</projection_type>
       </camera>
