@@ -1,8 +1,8 @@
 # tiago_custom
-Custom ROS package to run planning/learning experiments with Tiago Gallium robot in simulation. Built for ROS Noetic
+Custom ROS package to run planning/learning experiments with Tiago Gallium robot in simulation. Built for ROS Noetic.
 
 ## Tiago Gallium Tutorials
-http://wiki.ros.org/Robots/TIAGo/Tutorials
+Follow these tutorial to install the packages to run the Gazebo simulation of the Tiago Gallium robot: http://wiki.ros.org/Robots/TIAGo/Tutorials
 
 ## Running Simulation with Custom .world Files
 Copy the .world file to the .../tiago_public_ws/src/pal_gazebo_worlds/worlds/ directory. Then you can simulate the robot in the world by passing the name to the "world" argument when launching. For example, to simulate the robot in "prenovelty_domain.world", run:
