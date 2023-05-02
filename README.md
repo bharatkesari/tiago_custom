@@ -25,6 +25,14 @@ Follow the following tutorial: http://wiki.ros.org/Robots/TIAGo/Tutorials/Naviga
 roslaunch tiago_2dnav_gazebo tiago_mapping.launch public_sim:=true world:=prenovelty_domain
 ```
 
+Save the map using 
+
+```
+rosservice call /pal_map_manager/save_map "directory: ''"
+```
+
+This will create a directory containing the map files to the ~/.pal/tiago_maps/configurations directory. The map directory will be names as a timestamp. Change the name of the map directory to the name of the .world file that was mapped.
+
 ## Changing the Gripper
 Pass a gripper name to the end_effector argument to the launch file. Gripper names are located here: http://wiki.ros.org/Robots/TIAGo/Tutorials/Installation/Testing_simulation.
 
