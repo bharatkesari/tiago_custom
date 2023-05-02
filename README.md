@@ -43,7 +43,7 @@ roslaunch tiago_2dnav_gazebo tiago_navigation.launch public_sim:=true world:=pre
 This will only work if there exists a directory with all required map files in ~/.pal/tiago_maps/configurations. Here is an example of launching with a map directory in a different directory
 
 ```
-roslaunch tiago_2dnav_gazebo tiago_navigation.launch public_sim:=true lost:=true map:=$HOME/tiago_ws/src/tiago_custom/maps/prenovelty_domain
+roslaunch tiago_2dnav_gazebo tiago_navigation.launch public_sim:=true lost:=true map:=$HOME/tiago_public_ws/src/tiago_custom/maps/prenovelty_domain
 ```
 
 ## Changing the Gripper
