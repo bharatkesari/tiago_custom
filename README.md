@@ -18,8 +18,8 @@ After launching a simulation, run
 rosrun key_teleop key_teleop.py
 ```
 
-## Mapping, Navigation, and Localization Stack
-Follow the following tutorial: http://wiki.ros.org/Robots/TIAGo/Tutorials/Navigation/Mapping. Include the world argument to the launch file if you wish to change the world. For example: 
+## Mapping
+Follow the tutorial: http://wiki.ros.org/Robots/TIAGo/Tutorials/Navigation/Mapping. Include the world argument to the launch file if you wish to change the world. For example: 
 
 ```
 roslaunch tiago_2dnav_gazebo tiago_mapping.launch public_sim:=true world:=prenovelty_domain
@@ -32,6 +32,19 @@ rosservice call /pal_map_manager/save_map "directory: ''"
 ```
 
 This will create a directory containing the map files to the ~/.pal/tiago_maps/configurations directory. The map directory will be names as a timestamp. Change the name of the map directory to the name of the .world file that was mapped.
+
+## Navigation
+Follow the tutorial: http://wiki.ros.org/Robots/TIAGo/Tutorials/Navigation/Localization. An example launch command would be: 
+
+```
+roslaunch tiago_2dnav_gazebo tiago_navigation.launch public_sim:=true world:=prenovelty_domain
+```
+
+This will only work if there exists a directory with all required map files in ~/.pal/tiago_maps/configurations. Here is an example of launching with a map directory in a different directory
+
+```
+roslaunch tiago_2dnav_gazebo tiago_navigation.launch public_sim:=true lost:=true map:=$HOME/tiago_ws/src/tiago_custom/maps/prenovelty_domain
+```
 
 ## Changing the Gripper
 Pass a gripper name to the end_effector argument to the launch file. Gripper names are located here: http://wiki.ros.org/Robots/TIAGo/Tutorials/Installation/Testing_simulation.
