@@ -1,0 +1,6 @@
+objects : {
+  red_ball : {
+    radius: 0.5,
+    symetrical: true
+  }
+}
