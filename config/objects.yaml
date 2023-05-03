@@ -1,6 +1,11 @@
 objects : {
   red_ball : {
-    radius: 0.5,
-    symetrical: true
+    offset: 0.5,
+    direction: 270
+  },
+
+  bin : {
+    offset: 0.5,
+    direction: 90
   }
 }

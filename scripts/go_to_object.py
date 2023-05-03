@@ -50,8 +50,6 @@ class GoToObject(object):
         else:
             goal = self.build_goal(model_pose, model_info)
 
-            print(str(goal))
-
         return self.dispatch_goal(goal)
 
     def build_goal(self, model_pose, model_info):
@@ -60,33 +58,32 @@ class GoToObject(object):
         goal.target_pose.header.frame_id = 'map'
         goal.target_pose.header.stamp = rospy.Time.now()
 
-        # If object is symettric, build a target point at a random point around the object
-        if model_info['symetrical']:
-            # Generate a random vector with three components
-            vec = np.random.uniform(-1, 1, size=(2,))
+        # Get facing and displacement angles
+        f_angle = math.radians(model_info['direction'])
+        print(f_angle)
+        d_angle = (f_angle + math.pi) if (f_angle < math.pi) else (f_angle - math.pi)
+        print(d_angle)
 
-            # Normalize the vector to obtain a unit vector
-            unit_vec = vec / np.linalg.norm(vec)
 
-            # Multiply by radius
-            displacement_vec = unit_vec * model_info['radius']
+        # Compute displacement vector
+        offset = model_info['offset']
+        d_vec = offset * np.array([math.cos(d_angle), math.sin(d_angle)])
 
-            # Set position
-            goal.target_pose.pose.position.x = displacement_vec[0] + model_pose.position.x
-            goal.target_pose.pose.position.y = displacement_vec[0] + model_pose.position.y
-            goal.target_pose.pose.position.z = 0
+        rospy.loginfo(str(d_vec))
 
-            # Set orientation
-            # Compute the angle between the XY vector and the X-axis
-            theta = math.atan2(-displacement_vec[1], -displacement_vec[0])
+        # Set cartesian coords of goal
+        goal.target_pose.pose.position.x = model_pose.position.x + d_vec[0]
+        goal.target_pose.pose.position.y = model_pose.position.y + d_vec[1]
 
-            # Compute the quaternion from the angle
-            quat = tft.quaternion_from_euler(0, 0, theta)
-
-            goal.target_pose.pose.orientation.x = quat[0]
-            goal.target_pose.pose.orientation.y = quat[1]
-            goal.target_pose.pose.orientation.z = quat[2]
-            goal.target_pose.pose.orientation.w = quat[3]
+        # Set orientation of goal
+        quat = tft.quaternion_from_euler(0, 0, f_angle)
+        goal.target_pose.pose.orientation.x = quat[0]
+        goal.target_pose.pose.orientation.y = quat[1]
+        goal.target_pose.pose.orientation.z = quat[2]
+        goal.target_pose.pose.orientation.w = quat[3]  
+        
+        rospy.loginfo(str(model_pose))
+        rospy.loginfo(str(goal))
 
         return goal
 
@@ -95,7 +92,6 @@ class GoToObject(object):
         # Send goal
         print(str(goal))
         self.move_base.send_goal(goal)
-        rospy.loginfo('Sending goal')
         self.move_base.wait_for_result()
 
         if (self.move_base.get_state() == GoalStatus.SUCCEEDED):
