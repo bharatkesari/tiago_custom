@@ -3,52 +3,54 @@
 import rospy
 import actionlib
 from actionlib_msgs.msg import GoalStatus
-from robot_custom.srv import ModelPose, StringBool
+from robot_custom.srv import ObjPose, StringBool
 from move_base_msgs.msg import MoveBaseAction, MoveBaseGoal
 
 
 import tf.transformations as tft
 import math
 import numpy as np
-import time
 
-class GoToObject(object):
+class ObjectNav(object):
 
     def __init__(self) -> None:
         
-        rospy.init_node('go_to_object')
+        rospy.init_node('object_nav')
 
-        # Wait for get_model_pose service to become available
-        rospy.wait_for_service('/get_model_pose')
-        self.get_model_pose = rospy.ServiceProxy('get_model_pose', ModelPose)
+        # Wait for get_object_pose service to become available
+        rospy.wait_for_service('/get_object_pose')
+        self.get_object_pose = rospy.ServiceProxy('get_object_pose', ObjPose)
 
         # Wait for move_base to become available
         self.move_base = actionlib.SimpleActionClient('move_base', MoveBaseAction)
         self.move_base.wait_for_server()
 
         # Define go_to_object service
-        self.go_to_object = rospy.Service('go_to_object/', StringBool, self.handler)
+        self.object_nav = rospy.Service('object_nav/', StringBool, self.handler)
 
-        t = int(time.time())
-        np.random.seed(t)
+        rospy.loginfo("/object_nav service running")
 
         while not rospy.is_shutdown():
             rospy.spin()
 
     def handler(self, req):
         
+        rospy.loginfo(f"recieved request for {req.msg}")
+
+        # Get object info
         try:
-            model_info = rospy.get_param(f'objects/{req.msg}')
+            object_info = rospy.get_param(f'objects/{req.msg}')
         except KeyError:
-            rospy.logerr(f'Model named "{req.msg}" not found')
+            rospy.logerr(f'object named "{req.msg}" not found')
             return False
         
-        model_pose = self.get_model_pose(req.msg)
+        # Get object position in map frame
+        object_pose = self.get_object_pose(req.msg)
 
-        if not model_pose.success:
+        if not object_pose.success:
             return False
         else:
-            goal = self.build_goal(model_pose, model_info)
+            goal = self.build_goal(object_pose, object_info)
 
         return self.dispatch_goal(goal)
 
@@ -59,17 +61,12 @@ class GoToObject(object):
         goal.target_pose.header.stamp = rospy.Time.now()
 
         # Get facing and displacement angles
-        f_angle = math.radians(model_info['direction'])
-        print(f_angle)
+        f_angle = model_info['direction']
         d_angle = (f_angle + math.pi) if (f_angle < math.pi) else (f_angle - math.pi)
-        print(d_angle)
-
 
         # Compute displacement vector
         offset = model_info['offset']
         d_vec = offset * np.array([math.cos(d_angle), math.sin(d_angle)])
-
-        rospy.loginfo(str(d_vec))
 
         # Set cartesian coords of goal
         goal.target_pose.pose.position.x = model_pose.position.x + d_vec[0]
@@ -82,25 +79,24 @@ class GoToObject(object):
         goal.target_pose.pose.orientation.z = quat[2]
         goal.target_pose.pose.orientation.w = quat[3]  
         
-        rospy.loginfo(str(model_pose))
-        rospy.loginfo(str(goal))
-
         return goal
 
     
     def dispatch_goal(self, goal):
         # Send goal
-        print(str(goal))
         self.move_base.send_goal(goal)
         self.move_base.wait_for_result()
 
+        rospy.loginfo(f"attempting to navigate to:\n {str(goal.target_pose.pose)}")
+
         if (self.move_base.get_state() == GoalStatus.SUCCEEDED):
+            rospy.loginfo("navigation successful")
             return True
             
         return False
 
 if __name__ == '__main__':
     try:
-        GoToObject()
+        ObjectNav()
     except rospy.ROSException as e:
         rospy.logerr(e)
