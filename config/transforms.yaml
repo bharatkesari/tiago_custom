@@ -1,1 +1,2 @@
+# [x [m], y [m], z [m], r [rad], p [rad], y [rad]]
 gazebo_transform : [0, 0, 0, 0, 0, -1.1] 
