@@ -2,12 +2,12 @@
 
 import rospy
 from gazebo_msgs.srv import GetModelState
-from robot_custom.srv import ModelPose, ModelPoseResponse
+from robot_custom.srv import ObjPose, ObjPoseResponse
 import tf2_ros
 import geometry_msgs.msg
 import tf2_geometry_msgs
 
-class GetModelPose(object):
+class GetObjPose(object):
 
     def __init__(self) -> None:
         
@@ -17,8 +17,8 @@ class GetModelPose(object):
         rospy.wait_for_service('/gazebo/get_model_state')
         self.get_model_state = rospy.ServiceProxy('/gazebo/get_model_state', GetModelState)
 
-        # Define get_model_pose service
-        self.get_model_pose = rospy.Service('get_object_pose/', ModelPose, self.handler)
+        # Define get_obj_pose service
+        self.get_obj_pose = rospy.Service('get_object_pose/', ObjPose, self.handler)
 
         rospy.loginfo("/get_object_pose service is running")
 
@@ -33,15 +33,15 @@ class GetModelPose(object):
         rospy.loginfo(f"recieved request for {req.name}")
 
         # Get coordinates of object from gazebo
-        model_state = model_state = self.get_model_state(req.name, 'world')
+        object_state = object_state = self.get_object_state(req.name, 'world')
 
         # Transform to map frame
-        point_transformed = self.transform(model_state.pose.position)
+        point_transformed = self.transform(object_state.pose.position)
 
         rospy.loginfo(f"{req.name} position:")
-        rospy.loginfo(str(model_state.pose.position))
+        rospy.loginfo(str(object_state.pose.position))
 
-        return ModelPoseResponse(point_transformed, model_state.success)
+        return ObjPoseResponse(point_transformed, object_state.success)
 
     def transform(self, point):
         point_stamped = geometry_msgs.msg.PointStamped()
@@ -62,6 +62,6 @@ class GetModelPose(object):
 
 if __name__ == '__main__':
     try:
-        GetModelPose()
+        GetObjPose()
     except rospy.ROSException as e:
         rospy.logerr(e)
