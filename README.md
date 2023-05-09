@@ -82,6 +82,6 @@ Navigates the robot to an object in Gazebo. The object must have an entry in obj
 ### waypoints_nav (StringBool)
 Navigates the robot to a waypoint defined in waypoints.yaml. Returns true if navigation is successful and false otherwise.
 
-### pose_nav
+### pose_nav (TwistBool)
 Navigates the robot to a point in the ‘map’ frame.  Returns true if navigation is successful and false otherwise.
 
