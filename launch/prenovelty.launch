@@ -14,8 +14,10 @@
     <node pkg="robot_custom" type="waypoint_nav.py" name="waypoint_nav" output="screen"/>
     <node pkg="robot_custom" type="pose_nav.py" name="pose_nav" output="screen"/>
     <node pkg="robot_custom" type="map_to_gazebo_broadcaster.py" name="map_to_gazebo_broadcaster" output="screen"/>
+    <node pkg="robot_custom" type="at_predicate.py" name="at_predicate" output="screen"/>
 
     <rosparam command="load" file="$(find robot_custom)/config/objects.yaml"/>
     <rosparam command="load" file="$(find robot_custom)/config/waypoints.yaml"/>
     <rosparam command="load" file="$(find robot_custom)/config/transforms.yaml"/>
+    <rosparam command="load" file="$(find robot_custom)/config/boundaries.yaml"/>
 </launch>
