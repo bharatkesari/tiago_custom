@@ -76,3 +76,10 @@ class WaypointNav(object):
             return True
             
         return False
+    
+
+if __name__ == '__main__':
+    try:
+        WaypointNav()
+    except rospy.ROSException as e:
+        rospy.logerr(e)

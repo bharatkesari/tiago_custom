@@ -8,7 +8,7 @@ from robot_custom.srv import StringBool
 
 import tf.transformations as tft
 
-class WaypointNav(object):
+class PoseNav(object):
 
     def __init__(self) -> None:
         
@@ -69,3 +69,9 @@ class WaypointNav(object):
             return True
             
         return False
+
+if __name__ == '__main__':
+    try:
+        PoseNav()
+    except rospy.ROSException as e:
+        rospy.logerr(e)

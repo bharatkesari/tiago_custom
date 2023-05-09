@@ -12,7 +12,7 @@ if __name__ == '__main__':
     transform = []
 
     try:
-        transform = rospy.get_param('gazebo_transform')
+        transform = rospy.get_param('transforms/gazebo_transform')
     except:
         rospy.logerr('gazebo_transform param does not exist')
         rospy.signal_shutdown()
@@ -32,7 +32,7 @@ if __name__ == '__main__':
 
     transform_stamped.transform.rotation.x = quaternion[0]
     transform_stamped.transform.rotation.y = quaternion[1]
-    transform_stamped.transform.rotation.z = -quaternion[2]
+    transform_stamped.transform.rotation.z = quaternion[2]
     transform_stamped.transform.rotation.w = quaternion[3]
     rate = rospy.Rate(10.0)
 
