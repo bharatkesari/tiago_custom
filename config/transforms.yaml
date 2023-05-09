@@ -1,2 +1,5 @@
-# [x [m], y [m], z [m], r [rad], p [rad], y [rad]]
-gazebo_transform : [0, 0, 0, 0, 0, -1.1] 
+# [x [m], y [m], z [m], r [rad], p [rad], y [rad]] 
+# rpy must be positive
+transforms : {
+  gazebo_transform : [0, 0, 0, 0, 0, 5.2] 
+}

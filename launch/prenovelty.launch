@@ -2,17 +2,18 @@
 <launch>
     <arg name="gzpose" default="-x 0.0 -y 0.0 -z 0.0 -R 0.0 -P 0.0 -Y 0.0"/>
 
-    <include file="$(find tiago_2dnav_gazebo)/launch/navigation.launch">
+    <include file="$(find tiago_2dnav_gazebo)/launch/tiago_navigation.launch">
         <arg name="public_sim"   value="true"/>
         <arg name="world"        value="prenovelty_domain"/> 
         <arg name="gzpose"       value="$(arg gzpose)"/>
         <arg name="end_effector" value="pal-gripper"/>
     </include>
 
-    <node pkg="robot_custom" type="get_object_pose.py" name="get_object_pose"/>
-    <node pkg="robot_custom" type="object_nav.py" name="object_nav"/>
-    <node pkg="robot_custom" type="waypoint_nav.py" name="waypoint_nav"/>
-    <node pkg="robot_custom" type="pose_nav.py" name="pose_nav"/>
+    <node pkg="robot_custom" type="get_object_pose.py" name="get_object_pose" output="screen"/>
+    <node pkg="robot_custom" type="object_nav.py" name="object_nav" output="screen"/>
+    <node pkg="robot_custom" type="waypoint_nav.py" name="waypoint_nav" output="screen"/>
+    <node pkg="robot_custom" type="pose_nav.py" name="pose_nav" output="screen"/>
+    <node pkg="robot_custom" type="map_to_gazebo_broadcaster.py" name="map_to_gazebo_broadcaster" output="screen"/>
 
     <rosparam command="load" file="$(find robot_custom)/config/objects.yaml"/>
     <rosparam command="load" file="$(find robot_custom)/config/waypoints.yaml"/>

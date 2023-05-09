@@ -2,12 +2,12 @@
 # offset [m] direction [rad]
 objects : {
   red_ball : {
-    offset: 0.5,
+    offset: 0.75,
     direction: 3.665
   },
 
   bin_0 : {
-    offset: 0.5,
+    offset: 0.75,
     direction: 0.524
   }
 }

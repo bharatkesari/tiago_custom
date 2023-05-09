@@ -1,2 +1,4 @@
 # [x [m], y [m], z [m], r [rad], p [rad], y [rad]]
-origin : [0, 0, 0, 0, 0, 0]
+waypoints : {
+  origin : [0, 0, 0, 0, 0, 0]
+}
