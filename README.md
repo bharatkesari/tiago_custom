@@ -49,3 +49,39 @@ roslaunch tiago_2dnav_gazebo tiago_navigation.launch public_sim:=true lost:=true
 ## Changing the Gripper
 Pass a gripper name to the end_effector argument to the launch file. Gripper names are located here: http://wiki.ros.org/Robots/TIAGo/Tutorials/Installation/Testing_simulation.
 
+## Configurations
+### objects.yaml
+Contains a dictionary called 'objects'. Within the dictionary, Gazebo object names are keys, and values are sub-dictionaries. Each sub-dictionary holds the keys 'offset' and 'direction'. These parameters define a point relative to the Gazebo object used as the goal point when navigating to the object. The 'offset' and 'direction' parameters are defined in the 'map' frame.
+
+### waypoints.yaml
+Contains a dictionary called 'waypoints'. The keys of the dictionary are strings naming each waypoint. The values of the dictionary are arrays defining the location and orientation of each waypoint (xyzrpy). The waypoints are relative to the 'map' frame.
+
+### boundaries.yaml
+TBD
+
+### transforms.yaml
+Contains a dictionary called 'transforms'. The keys of the dictionary are strings representing the names of reference frames. The values of the dictionsary are arrays defining transformation between the new frame and the 'map' frame.
+
+## Custom Service Types
+### ObjPose.srv
+The request is comprised of a string, and the response returns a geometry_msgs/Point and a Boolean.
+
+### StringBool.srv
+The request is comprised of a string, and the response returns a Boolean.
+
+### TwistBool.srv
+The request is comprised of a geometry_msgs/Twist, and returns a Boolean.
+
+## Custom Services
+### get_object_pose (ObjPose)
+Returns the location of an object in Gazebo. The name of the object is sent as the request. If the object is found, the 'success' field of the response is set to true. If the object is not found, the 'success' field of the response is set to false.
+
+### obj_nav (StringBool)
+Navigates the robot to an object in Gazebo. The object must have an entry in objects.yaml. Returns true if navigation is successful and false otherwise.
+
+### waypoints_nav (StringBool)
+Navigates the robot to a waypoint defined in waypoints.yaml. Returns true if navigation is successful and false otherwise.
+
+### pose_nav
+Navigates the robot to a point in the ‘map’ frame.  Returns true if navigation is successful and false otherwise.
+
