@@ -19,7 +19,7 @@ class AtPublisher(object):
         self.at_pred = 'none'
 
         try:
-            self.boundaries = rospy.get_param('boundaries')
+            self.boundaries = rospy.get_param('at_boundaries')
         except:
             rospy.logerr('Boundaries parameter does not exist')
             rospy.signal_shutdown()
@@ -29,11 +29,13 @@ class AtPublisher(object):
         for boundry_name, boundry_points in self.boundaries.items():
             self.polygons[boundry_name] = Polygon(boundry_points)
 
-        # Subscribe to odom topic
-        self.odom_sub = rospy.Subscriber('/ground_truth_odom', PoseWithCovarianceStamped, self.handler)
+        # Subscribe to pose topic
+        self.odom_sub = rospy.Subscriber('/amcl_pose', PoseWithCovarianceStamped, self.handler)
 
         # Create publisher
-        self.at_pub = rospy.Publisher('/at_predicate', String)
+        self.at_pub = rospy.Publisher('/at_predicate', String, queue_size=10)
+
+        rospy.loginfo('at_publisher is running')
 
         while not rospy.is_shutdown():
             self.at_pub.publish(String(self.at_pred))
@@ -49,7 +51,12 @@ class AtPublisher(object):
         for boundry_name, poly in self.polygons.items():
             if poly.contains(point):
                 self.at_pred = boundry_name
-                break
+                return
         
+        self.at_pred = 'none'
         
-
+if __name__ == '__main__':
+    try:
+        AtPublisher()
+    except rospy.ROSException as e:
+        rospy.logerr(e)
