@@ -4,7 +4,7 @@ at_boundaries : {
 }
 
 facing_boundaries : {
-  red_ball : {
+  aruco_cube : {
     type : "object",
     radius : 1.5,
     angle : 0.3,
