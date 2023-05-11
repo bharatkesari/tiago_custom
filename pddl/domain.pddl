@@ -4,7 +4,7 @@
 (:requirements :strips :fluents :typing :negative-preconditions)
 
 (:types ;todo: enumerate types and their hierarchy here, e.g. car truck bus - vehicle
-    room trash nothing robot doorway bin - object
+    room ball can nothing robot doorway bin - object
 )
 
 ; un-comment following line if constants are needed
