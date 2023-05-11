@@ -25,6 +25,7 @@ class GetObjPose(object):
         # Create buffer to hold most recent map-gazebo transform
         self.buffer = tf2_ros.Buffer()
         self.listener = tf2_ros.TransformListener(self.buffer)
+        rospy.sleep(2)
 
         while not rospy.is_shutdown():
             rospy.spin()
@@ -33,7 +34,7 @@ class GetObjPose(object):
         rospy.loginfo(f"recieved request for {req.name}")
 
         # Get coordinates of object from gazebo
-        object_state = object_state = self.get_object_state(req.name, 'world')
+        object_state = self.get_model_state(req.name, 'world')
 
         # Transform to map frame
         point_transformed = self.transform(object_state.pose.position)
