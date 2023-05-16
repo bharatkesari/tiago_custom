@@ -18,11 +18,15 @@ class AtPublisher(object):
         # Default at_predicate value
         self.at_pred = 'none'
 
-        try:
-            self.boundaries = rospy.get_param('at_boundaries')
-        except:
-            rospy.logerr('Boundaries parameter does not exist')
-            rospy.signal_shutdown()
+        # Get 'at_boundaries' parameter
+        while not rospy.search_param('at_boundaries'):
+            rospy.logerr_once("'at_boundaries' parameter is not set")
+        
+        self.boundaries = rospy.get_param('at_boundaries')
+
+        if type(self.boundaries) != dict:
+            rospy.logerr("'at_boundaries' parameter is not a dict, setting to empty dict")
+            self.boundaries = {}
 
         # create polygons
         self.polygons = {}
@@ -34,7 +38,6 @@ class AtPublisher(object):
 
         # Create publisher
         self.at_pub = rospy.Publisher('/at_predicate', String, queue_size=10)
-
         rospy.loginfo('at_publisher is running')
 
         while not rospy.is_shutdown():

@@ -2,12 +2,12 @@
 # offset [m] direction [rad]
 objects : {
   aruco_cube : {
-    offset: 0.65,
-    direction: 3.665
+    offset: 0.5,
+    direction: 4.71,
   },
 
   bin : {
     offset: 0.75,
-    direction: 0.524
+    direction: 0.524,
   }
 }

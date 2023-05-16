@@ -28,14 +28,16 @@ class FacingPublisher(object):
         # Default at_predicate value
         self.facing_pred = 'none'
 
-        # Load in objects
-        self.obj = {}
+        # Get 'facing_boundaries' parameter
+        while not rospy.search_param('facing_boundaires'):
+            rospy.logerr_once("'facing_boundaries' parameter is not set")
+            rospy.spin()
 
-        try:
-            self.obj = rospy.get_param('facing_boundaries')
-        except:
-            rospy.logerr('Boundaries parameter does not exist')
-            rospy.signal_shutdown()
+        self.obj = rospy.get_param('facing_boundaries')
+
+        if type(self.obj) != dict:
+            rospy.logerr("'facing_boundaries' parameter is not a dict, setting to empty dict")
+            self.obj = {}
 
         # Subscribe to pose topic
         self.odom_sub = rospy.Subscriber('/amcl_pose', PoseWithCovarianceStamped, self.handler)

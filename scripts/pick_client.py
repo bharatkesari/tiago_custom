@@ -140,7 +140,7 @@ class PickAruco(object):
 			rospy.loginfo("aruco pose in base_footprint:" + str(pick_g))
 
 			pick_g.object_pose.header.frame_id = 'base_footprint'
-			pick_g.object_pose.pose.orientation.w = 1.0
+			pick_g.object_pose.pose.orientation = aruco_ps.pose.orientation
 			self.detected_pose_pub.publish(pick_g.object_pose)
 			rospy.loginfo("Gonna pick:" + str(pick_g))
 			self.pick_as.send_goal_and_wait(pick_g)
@@ -155,12 +155,18 @@ class PickAruco(object):
 			self.prepare_placing_robot()
 			rospy.loginfo("Raise object done.")
 
+			# # Place the object back to its position
+			# rospy.loginfo("Gonna place near where it was")
+			# pick_g.object_pose.pose.position.z += 0.07
+			# self.place_as.send_goal_and_wait(pick_g)
+			# rospy.loginfo("Done!")
+
 	def lower_head(self):
 		rospy.loginfo("Moving head down")
 		jt = JointTrajectory()
 		jt.joint_names = ['head_1_joint', 'head_2_joint']
 		jtp = JointTrajectoryPoint()
-		jtp.positions = [0.0, -1]
+		jtp.positions = [0.0, -0.75]
 		jtp.time_from_start = rospy.Duration(2.0)
 		jt.points.append(jtp)
 		self.head_cmd.publish(jt)

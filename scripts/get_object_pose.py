@@ -37,30 +37,26 @@ class GetObjPose(object):
         object_state = self.get_model_state(req.name, 'world')
 
         # Transform to map frame
-        point_transformed = self.transform(object_state.pose.position)
+        pose_transformed = self.transform(object_state.pose)
 
-        rospy.loginfo(f"{req.name} position:")
-        rospy.loginfo(str(object_state.pose.position))
+        return ObjPoseResponse(pose_transformed, object_state.success)
 
-        return ObjPoseResponse(point_transformed, object_state.success)
+    def transform(self, pose):
+        pose_stamped = geometry_msgs.msg.PoseStamped()
+        pose_stamped.header.frame_id = 'gazebo'
+        pose_stamped.header.stamp = rospy.Time.now()
 
-    def transform(self, point):
-        point_stamped = geometry_msgs.msg.PointStamped()
-        point_stamped.header.frame_id = 'gazebo'
-        point_stamped.point.x = point.x
-        point_stamped.point.y = point.y
-        point_stamped.point.z = point.z
+        pose_stamped.pose = pose
 
         # Transform to map frame
         try:
             transform_stamped = self.buffer.lookup_transform('map', 'gazebo', rospy.Time())
-            point_transformed = tf2_geometry_msgs.do_transform_point(point_stamped, transform_stamped)
+            pose_transformed = tf2_geometry_msgs.do_transform_pose(pose_stamped, transform_stamped)
         except (tf2_ros.LookupException, tf2_ros.ConnectivityException, tf2_ros.ExtrapolationException) as e:
             rospy.logerr(f"Transform lookup failed: {e}")
 
-        return point_transformed.point
+        return pose_transformed.pose
     
-
 if __name__ == '__main__':
     try:
         GetObjPose()

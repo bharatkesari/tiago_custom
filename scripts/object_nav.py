@@ -28,6 +28,10 @@ class ObjectNav(object):
         # Define go_to_object service
         self.object_nav = rospy.Service('object_nav/', StringBool, self.handler)
 
+        # # Create velocity_cmd publisher
+        # self.cmd_vel_pub = rospy.Publisher('/mobile_base_controller/cmd_vel', Twist, queue_size=10)
+        # self.rate = rospy.Rate(3)
+
         rospy.loginfo("/object_nav service running")
 
         while not rospy.is_shutdown():
@@ -49,10 +53,13 @@ class ObjectNav(object):
 
         if not object_pose.success:
             return False
-        else:
-            goal = self.build_goal(object_pose, object_info)
+        
+        goal = self.build_goal(object_pose.pose.position, object_info)
 
-        return self.dispatch_goal(goal)
+        success = self.dispatch_goal(goal)
+
+        return success
+
 
     def build_goal(self, model_pose, model_info):
         # Build goal
@@ -69,8 +76,8 @@ class ObjectNav(object):
         d_vec = offset * np.array([math.cos(d_angle), math.sin(d_angle)])
 
         # Set cartesian coords of goal
-        goal.target_pose.pose.position.x = model_pose.position.x + d_vec[0]
-        goal.target_pose.pose.position.y = model_pose.position.y + d_vec[1]
+        goal.target_pose.pose.position.x = model_pose.x + d_vec[0]
+        goal.target_pose.pose.position.y = model_pose.y + d_vec[1]
 
         # Set orientation of goal
         quat = tft.quaternion_from_euler(0, 0, f_angle)

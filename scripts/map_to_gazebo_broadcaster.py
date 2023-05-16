@@ -29,7 +29,6 @@ if __name__ == '__main__':
 
     print(quaternion)
 
-
     transform_stamped.transform.rotation.x = quaternion[0]
     transform_stamped.transform.rotation.y = quaternion[1]
     transform_stamped.transform.rotation.z = quaternion[2]

@@ -6,14 +6,14 @@ at_boundaries : {
 facing_boundaries : {
   aruco_cube : {
     type : "object",
-    radius : 1.5,
+    radius : 0.5,
     angle : 0.3,
     graspable : true 
   },
 
   bin : {
     type : "object",
-    radius : 1.5,
+    radius : 1,
     angle : 0.4,
     graspable : false
   },
