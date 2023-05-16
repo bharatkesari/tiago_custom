@@ -1,3 +1,6 @@
+Output
+---------------------------------
+
 ff: parsing domain file
 domain 'RECYCLE_BOT' defined
  ... done.
@@ -21,12 +24,12 @@ Cueing down from goal distance:    6 into depth [1]
                                    0            
 
 ff: found legal plan as follows
-step    0: APPROACH DOORWAY_1 ROOM_1 NOTHING
-        1: PASS_THROUGH_DOOR ROOM_1 ROOM_2 DOORWAY_1
-        2: APPROACH BIN_1 ROOM_2 NOTHING
-        3: APPROACH TRASH_1 ROOM_1 DOORWAY_1
-        4: PICK BIN_1 ROOM_2
-        5: PLACE BIN_1 ROOM_1 TRASH_1
+step    0: APPROACH BALL_1 ROOM_1 NOTHING
+        1: PICK BALL_1 ROOM_1
+        2: APPROACH DOORWAY_1 ROOM_1 BALL_1
+        3: PASS_THROUGH_DOOR ROOM_1 ROOM_2 DOORWAY_1
+        4: APPROACH BIN_1 ROOM_2 NOTHING
+        5: PLACE BALL_1 ROOM_2 BIN_1
 
 time spent:    0.00 seconds instantiating 274 easy, 0 hard action templates
                0.00 seconds reachability analysis, yielding 49 facts and 93 actions
