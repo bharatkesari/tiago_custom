@@ -49,8 +49,8 @@ class SphericalService(object):
 		rospy.loginfo("Starting Spherical Grab Service")
 		self.pick_type = PickAruco()
 		rospy.loginfo("Finished SphericalService constructor")
-		self.place_gui = rospy.Service("/place_gui", Empty, self.start_aruco_place)
-		self.pick_gui = rospy.Service("/pick_gui", Empty, self.start_aruco_pick)
+		self.place_gui = rospy.Service("/place", Empty, self.start_aruco_place)
+		self.pick_gui = rospy.Service("/pick", Empty, self.start_aruco_pick)
 
 	def start_aruco_pick(self, req):
 		self.pick_type.pick_aruco("pick")
@@ -175,7 +175,7 @@ class PickAruco(object):
 	def prepare_robot(self):
 		rospy.loginfo("Unfold arm safely")
 		pmg = PlayMotionGoal()
-		pmg.motion_name = 'pregrasp'
+		pmg.motion_name = 'prepare_grasp'
 		pmg.skip_planning = False
 		self.play_m_as.send_goal_and_wait(pmg)
 		rospy.loginfo("Done.")
