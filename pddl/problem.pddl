@@ -2,10 +2,10 @@
 (:objects 
     doorway_1 - doorway
     room_1 room_2 - room
-    ball_1 - ball
+    aruco_cube_1 - aruco_cube
     can_1 - can
     bin_1 - bin
-    nothing - nothing
+    none - none
     robot_1 - robot
 )
 
@@ -17,10 +17,10 @@
     ; variable states
     (at room_1 robot_1)
     (at room_1 can_1)
-    (at room_1 ball_1)
+    (at room_1 aruco_cube_1)
     (at room_2 bin_1)
-    (facing nothing)
-    (hold nothing)
+    (facing none)
+    (hold none)
     (at room_1 doorway_1)
     (at room_2 doorway_1)
 )
@@ -31,7 +31,7 @@
     ; (at room_2 robot_1)
     ; (hold trash_1)
     ; (facing bin_1)
-    (contain ball_1 bin_1)
+    (contain aruco_cube_1 bin_1)
     ; (facing doorway_1)
     )
 )

@@ -1,0 +1,13 @@
+planning_scene : {
+  table : {
+    depth : 0.8,
+    width : 1.5,
+    height : 0.53,
+  },
+  
+  bin : {
+    depth : 0.55,
+    width : 0.55,
+    height : 0.3,
+  }
+}

@@ -4,7 +4,7 @@
 (:requirements :strips :fluents :typing :negative-preconditions)
 
 (:types ;todo: enumerate types and their hierarchy here, e.g. car truck bus - vehicle
-    room ball can nothing robot doorway bin - object
+    room aruco_cube can none robot doorway bin - object
 )
 
 ; un-comment following line if constants are needed
@@ -41,7 +41,7 @@
     :effect 
     (and
         (at ?room02 robot_1)
-        (facing nothing)
+        (facing none)
     )
 )
 
@@ -51,10 +51,10 @@
         (at ?room01 ?object01)
         (at ?room01 robot_1)
         (facing ?object01)
-        (hold nothing)
+        (hold none)
      )
     :effect (and
-        (facing nothing)
+        (facing none)
         (hold ?object01)
      )
 )
@@ -67,7 +67,7 @@
         (hold ?object01)
     )
     :effect (and 
-        (hold nothing)
+        (hold none)
         (contain ?object01 ?object02)
     )
     )

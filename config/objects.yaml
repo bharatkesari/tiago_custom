@@ -3,11 +3,11 @@
 objects : {
   aruco_cube : {
     offset: 0.5,
-    direction: 4.71,
+    direction: 4.8,
   },
 
   bin : {
-    offset: 0.75,
-    direction: 0.524,
+    offset: 0.6,
+    direction: 1.57,
   }
 }

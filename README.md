@@ -57,10 +57,10 @@ Contains a dictionary called 'objects'. Within the dictionary, Gazebo object nam
 Contains a dictionary called 'waypoints'. The keys of the dictionary are strings naming each waypoint. The values of the dictionary are arrays defining the location and orientation of each waypoint (xyzrpy). The waypoints are relative to the 'map' frame.
 
 ### boundaries.yaml
-TBD
+Contains two dictionaries used to maintain the 'at' and 'facing' predicate of the robot. The dictionary 'at_boundaries' has string keys naming each boundary, and the values are arrays containing a set of (x, y) coordinates defining a polygon for the boundary. The dictionary 'facing_boundaries' contains a sub-dictionary for each object, or abstract thing the robot can face in the world. Each sub-dictionary defines an radius and an angle for the robot to be facing that thing. If the thing is abstract, a central location must be provided in the sub-dictionary. 
 
 ### transforms.yaml
-Contains a dictionary called 'transforms'. The keys of the dictionary are strings representing the names of reference frames. The values of the dictionsary are arrays defining transformation between the new frame and the 'map' frame.
+Contains a dictionary called 'transforms'. The keys of the dictionary are strings representing the names of reference frames. The values of the dictionary are arrays defining transformation between the new frame and the 'map' frame.
 
 ## Custom Service Types
 ### ObjPose.srv
@@ -85,3 +85,8 @@ Navigates the robot to a waypoint defined in waypoints.yaml. Returns true if nav
 ### pose_nav (TwistBool)
 Navigates the robot to a point in the ‘map’ frame.  Returns true if navigation is successful and false otherwise.
 
+### pick (Empty)
+TBD
+
+### place (Empty)
+TBD
