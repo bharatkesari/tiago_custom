@@ -172,6 +172,17 @@ class PickAruco(object):
 		self.head_cmd.publish(jt)
 		rospy.loginfo("Done.")
 
+	def raise_head(self):
+		rospy.loginfo("Moving head up")
+		jt = JointTrajectory()
+		jt.joint_names = ['head_1_joint', 'head_2_joint']
+		jtp = JointTrajectoryPoint()
+		jtp.positions = [0.0, 0.0]
+		jtp.time_from_start = rospy.Duration(2.0)
+		jt.points.append(jtp)
+		self.head_cmd.publish(jt)
+		rospy.loginfo("Done.")
+
 	def prepare_robot(self):
 		rospy.loginfo("Unfold arm safely")
 		pmg = PlayMotionGoal()
